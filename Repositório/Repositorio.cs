@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using ClinicaVeterinária.Modelo;
 
 namespace ClinicaVeterinária.Repositório
 {
     public class Repositorio : IRepositorio
     {
+        public const int total = 142;
         public Animal[] animaisCadastrados;
         public Pessoa[] pessoas;
         public Vacina[] vacinas;
@@ -129,6 +125,21 @@ namespace ClinicaVeterinária.Repositório
 
         }
 
+        public void ListarVacinas()
+        {
+            try
+            {
+                for (int i = 0; i < vacinas.Length; i++)
+                {
+                    Console.WriteLine(vacinas[i].ToString());
+                    Console.WriteLine("____________________________________________________________________________");
+                }
+            }
+            catch (NullReferenceException)
+            {
+
+            }
+        }
         public void AdicionarVacina(int id, DateTime data, string lote, string produtor, int quantidadeMl, Nome nomeV)
         {
 
@@ -171,6 +182,22 @@ namespace ClinicaVeterinária.Repositório
             }
         }
 
+        public DateTime CalcularDataVencimento(Vacina vacina)
+        {
+            DateTime dataVencimento = vacina.Data;
+
+            if (vacina.Periodicidade == "Semestral")
+            {
+                dataVencimento = dataVencimento.AddMonths(6);
+            }
+            else if (vacina.Periodicidade == "Anual")
+            {
+                dataVencimento = dataVencimento.AddYears(1);
+            }
+
+            return dataVencimento;
+        }
+
         public void DeclararObito(string idAuricular, DateTime data)
         {
             Animal animal = ProcurarAnimal(idAuricular);
@@ -200,67 +227,108 @@ namespace ClinicaVeterinária.Repositório
 
             }
         }
-
-        public void ListarAnimaisComVacinasAtraso()
+        public int DataDias(DateTime data)
         {
-
-            Console.WriteLine("Listagem de animais com vacinas em atraso:");
-            Console.WriteLine("----------------------------------------");
+            int dias = 0;
+            dias += ((DateTime.Now.Year - data.Year) * 365);
+            dias += ((DateTime.Now.Month - data.Month) * 30);
+            dias += DateTime.Now.Day - data.Day;
+            return dias;
+        }
+        public Animal[] ListarAnimaisComVacinasAtraso()
+        {
+                Animal[] animaisComVacinasEmAtraso = new Animal[0];
+                int count = 0;
             try
             {
-                Vacina[] vacinasAtrasadas = new Vacina[20];
+                // Percorrer a lista de animais cadastrados
                 foreach (Animal animal in animaisCadastrados)
                 {
-
-                    int i = 0;
-                    if (animal != null)
+                    // Percorrer a caderneta de vacinas do animal
+                    for (int i = 0; i < animal.CadernetaVacinas.Length; i++)
                     {
-                        bool vacinasEmAtraso = false;
-
-                        foreach (Vacina vacina in animal.CadernetaVacinas[i])
+                        if (animal.CadernetaVacinas[i] != null)
                         {
-                            i++;
-                            if (vacina.Validacao())
+                            for (int j = 0; j < animal.CadernetaVacinas[i].Length; j++)
                             {
-                                vacinasEmAtraso = true;
-                                vacinasAtrasadas.Append(vacina);
-                                break;
+                                if (animal.CadernetaVacinas[i][j] != null)
+                                {
+                                    Vacina vacina = animal.CadernetaVacinas[i][j];
+
+                                    // Verificar se a vacina está atrasada com mais de 180 dias após a data de toma
+                                    DateTime dataLimite = vacina.Data.AddMonths(vacina.ToIntPeriodicidade(vacina.Periodicidade)).AddDays(180);
+                                    if (DateTime.Now > dataLimite)
+                                    {
+                                        // Adicionar o animal ao array de animais com vacinas em atraso
+                                        Array.Resize(ref animaisComVacinasEmAtraso, count + 1);
+                                        animaisComVacinasEmAtraso[count] = animal;
+                                        count++;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+               
+            }
+            catch (NullReferenceException) { }
+            for (int h = 0;h<count; h++)
+            {
+                Console.WriteLine(animaisComVacinasEmAtraso[h].ToString());
+                Console.WriteLine("--------------------------------------------------------------------------------------------");
+            }
+            return animaisComVacinasEmAtraso ;
+            
+        }
+
+        public Animal[] ListarAnimaisSemVacinas()
+        {
+            Animal[] animaisSemVacinas = new Animal[0];
+            int count = 0;
+            try
+            {
+                // Percorrer a lista de animais cadastrados
+                foreach (Animal animal in animaisCadastrados)
+                {
+                    bool possuiVacina = false;
+
+                    // Percorrer a caderneta de vacinas do animal
+                    for (int i = 0; i < animal.CadernetaVacinas.Length; i++)
+                    {
+                        if (animal.CadernetaVacinas[i] != null)
+                        {
+                            for (int j = 0; j < animal.CadernetaVacinas[i].Length; j++)
+                            {
+                                if (animal.CadernetaVacinas[i][j] != null)
+                                {
+                                    possuiVacina = true;
+                                    break;
+                                }
                             }
                         }
 
-                        if (vacinasEmAtraso)
+                        if (possuiVacina)
                         {
-                            Console.WriteLine($"Auricular: {animal.IdAuricular}");
-                            Console.WriteLine($"Proprietário: {animal.ProprietarioAtual.Nome}");
-                            Console.WriteLine($"Espécie: {animal.Tipo}");
-                            Console.WriteLine($"Última vacina: {animal.ObterUltimaVacina()}");
-                            Console.WriteLine();
+                            break;
                         }
                     }
-                }
 
-
-            }
-            catch (NullReferenceException) { }
-        }
-
-        public void ListarAnimaisSemVacinas()
-        {
-            try
-            {
-                foreach (Animal animal in animaisCadastrados)
-                {
-                    if (animal.CadernetaVacinas[0] == null)
+                    // Verificar se o animal não possui vacinas registradas
+                    if (!possuiVacina)
                     {
-                        Console.WriteLine(animal.ToString());
-                        Console.WriteLine("____________________________________________________________________________");
+                        Array.Resize(ref animaisSemVacinas, count + 1);
+                        animaisSemVacinas[count] = animal;
+                        count++;
                     }
                 }
             }
-            catch (NullReferenceException)
+            catch (NullReferenceException) { }
+            for(int i = 0;i < animaisSemVacinas.Length; i++)
             {
-
+                Console.WriteLine(animaisSemVacinas[i].ToString());
+                Console.WriteLine("--------------------------------------------------------------------------------------------");
             }
+            return animaisSemVacinas;
         }
 
         public void ListarPessoas()
@@ -323,11 +391,16 @@ namespace ClinicaVeterinária.Repositório
         {
             try{ 
             
-            foreach (Vacina vacina in vacinas)
+            for (int i =0; i<vacinas.Length; i++)
             {
-                if (vacina.id == id)
+                if (vacinas[i].id == id)
                 {
-                    return vacina;
+                    Console.WriteLine(vacinas[i].ToString());
+                    return vacinas[i];
+                    }
+                else
+                {
+                    Console.WriteLine($"Vacina com esse id {id} não encontrada");
                 }
             }
             

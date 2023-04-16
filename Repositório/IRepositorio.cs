@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ClinicaVeterinária.Modelo;
 
 namespace ClinicaVeterinária.Repositório
@@ -15,13 +11,15 @@ namespace ClinicaVeterinária.Repositório
         void DeclararObito(string idAuricular, DateTime data);
         void ListarAnimais();
         void ListarPessoas();
-        void ListarAnimaisComVacinasAtraso();
+        void ListarVacinas();
+        Animal[] ListarAnimaisComVacinasAtraso();
         Animal ProcurarAnimal(string idAuricular);
         Vacina ProcurarVacina(int id);
+        DateTime CalcularDataVencimento(Vacina vacina);
         Pessoa ProcurarPessoa(long telefone);
         void AdicionarProprietario(string nomeP, string endereco, long telefone, string email);
         void TrocarProprietario(string idAuricular, Pessoa novoProprietario, long telefone);
-        void ListarAnimaisSemVacinas();
+        Animal[] ListarAnimaisSemVacinas();
         void AdicionarNaCaderneta(string idAuricular, Vacina vacina);
 
         

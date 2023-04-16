@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClinicaVeterinária.Modelo
 {
@@ -32,6 +27,7 @@ namespace ClinicaVeterinária.Modelo
             Nome = nome;
             Periodicidade= periodicidade;
         }
+
         public bool Validacao()
         {
             if (Periodicidade == "Anual") {
@@ -88,12 +84,12 @@ namespace ClinicaVeterinária.Modelo
                     break;
             }
             return 
-                $"ID: {id}" +
-                $"\nData: {Data}" +
-                $"\nLote: {Lote}" +
-                $"\nProdutor: {Produtor}" +
-                $"\nQuantidade de doses: {QuantidadeDose}" +
-                $"\nNome: {selecaoNome}\nPeriodicidade: {Periodicidade}";
+                $"ID: {id}" + $"| Data: {Data.ToShortDateString()}" +
+
+                $"| Lote: {Lote}" +
+                $"| Produtor: {Produtor}" +
+                $"\n Quantidade de doses: {QuantidadeDose}" +
+                $"| Nome: {selecaoNome} | Periodicidade: {Periodicidade}";
         }
 
     }

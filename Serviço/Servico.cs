@@ -1,12 +1,7 @@
 ﻿using ClinicaVeterinária.Repositório;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading;
 using ClinicaVeterinária.Modelo;
-using System.Threading.Tasks;
+
 
 namespace ClinicaVeterinária.Serviço
 {
@@ -34,9 +29,10 @@ namespace ClinicaVeterinária.Serviço
                     Console.WriteLine("| 4 - Registar Animal                                          |.╚═███═╝");
                     Console.WriteLine("| 5 - Registar Pessoa                                          |╚═███═╝");
                     Console.WriteLine("| 6 - Registar Óbito                                           |╚═███═╝");
-                    Console.WriteLine("| 7 - Registar Vacina                                          |.╚═███═╝");
-                    Console.WriteLine("| 8 - Alterar Titular                                          |..╚═███═╝");
-                    Console.WriteLine("| 9 - Listar Titulares                                         |...╚═███═╝");
+                    Console.WriteLine("| 7 - Registar Vacina                                          |╚═███═╝");
+                    Console.WriteLine("| 8 - Procurar Vacina                                          |.╚═███═╝");
+                    Console.WriteLine("| 9 - Alterar Titular                                          |..╚═███═╝");
+                    Console.WriteLine("| 0 - Listar Titulares                                         |...╚═███═╝");
                     Console.WriteLine("|______________________________________________________________|... ╚═█═╝");
                 //Escolha do item do menu
                     Console.WriteLine("Insira uma escolha: ");
@@ -74,19 +70,33 @@ namespace ClinicaVeterinária.Serviço
                             break;
                         case '8':
                             Console.Clear();
-                            AlterarTitular();
+                            ProcuraVacina();
                             break;
                         case '9':
                             Console.Clear();
+                            AlterarTitular();
+                            break;
+                        case '0':
+                            Console.Clear();
                             ListarTitulares();
                             break;
-                        default:
+                    default:
                             Console.WriteLine("Erro escolha inválida: Insira um numeo de 1 a 6 consoante a opção desejada");
                             break;
                     }
                 MenuNav();
                 } while (sentinela);
             
+        }
+
+        private void ProcuraVacina()
+        {
+            Console.WriteLine("---------------------------------------------------------------- ");
+            Console.WriteLine("|                        Procurar Vacina                       | ");
+            Console.WriteLine("---------------------------------------------------------------- ");
+            Console.WriteLine("Insira o id da Vacina: ");
+            int id = Convert.ToInt32(Console.ReadLine());
+            veterinario.ProcurarVacina(id);
         }
 
         private void RegistarObito()
@@ -397,11 +407,20 @@ namespace ClinicaVeterinária.Serviço
             veterinario.AdicionarVacina(3, new DateTime(2022, 03, 30), "Lote3", "Produtor3", 15, Nome.Vermifugação);
             veterinario.AdicionarVacina(4, new DateTime(2022, 04, 10), "Lote4", "Produtor4", 10, Nome.FebreAftosa);
             veterinario.AdicionarVacina(5, new DateTime(2022, 05, 20), "Lote5", "Produtor5", 5, Nome.Leptospirose);
+            veterinario.AdicionarVacina(6, new DateTime(2023, 03, 20), "Lote2", "Produtor2", 5, Nome.Brucelose);
+            veterinario.AdicionarVacina(7, new DateTime(2023, 03, 30), "Lote3", "Produtor3", 15, Nome.Vermifugação);
+            veterinario.AdicionarVacina(8, new DateTime(2023, 04, 11), "Lote4", "Produtor4", 10, Nome.FebreAftosa);
+            veterinario.AdicionarVacina(10, new DateTime(2023, 01, 10), "Lote1", "Produtor1", 10, Nome.Botulismo);
             veterinario.AdicionarNaCaderneta("123", veterinario.ProcurarVacina(1));
             veterinario.AdicionarNaCaderneta("123", veterinario.ProcurarVacina(2));
             veterinario.AdicionarNaCaderneta("789", veterinario.ProcurarVacina(3));
             veterinario.AdicionarNaCaderneta("456", veterinario.ProcurarVacina(4));
             veterinario.AdicionarNaCaderneta("345", veterinario.ProcurarVacina(5));
+            veterinario.AdicionarNaCaderneta("123", veterinario.ProcurarVacina(10));
+            veterinario.AdicionarNaCaderneta("789", veterinario.ProcurarVacina(6));
+            veterinario.AdicionarNaCaderneta("789", veterinario.ProcurarVacina(7));
+            veterinario.AdicionarNaCaderneta("456", veterinario.ProcurarVacina(8));
+
         }
         public void AlterarTitular()
         {
