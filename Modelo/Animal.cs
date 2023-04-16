@@ -16,8 +16,6 @@ namespace ClinicaVeterinária.Modelo
         public Pessoa ProprietarioAtual { get; set; }
         public Vacina[][] CadernetaVacinas { get; set; }
         public TipoAnimal Tipo { get; set; }
-
-
         public Animal(string idAuricular, Regulamentacao regulamentacao ,DateTime dataNascimento, TipoAnimal tipo, Pessoa titular, string nome)
         {
 
@@ -34,6 +32,7 @@ namespace ClinicaVeterinária.Modelo
             Tipo = tipo;
             ProprietarioAtual = titular;
             this.NomeA = nome;
+            
         }
         public DateTime ObterUltimaVacina()
         {
@@ -92,12 +91,12 @@ namespace ClinicaVeterinária.Modelo
             {
                 for (int i = 0; i < CadernetaVacinas.Length; i++)
                 {
-                    if (i == 0) nomeVacina = "I.Brotulismo";
-                    if (i == 1) nomeVacina1 = "II.Brucelose";
-                    if (i == 2) nomeVacina2 = "III.Clostridioses";
-                    if (i == 3) nomeVacina3 = "IV.Febre Aftosa";
-                    if (i == 4) nomeVacina4 = "V.Leptospirose";
-                    if (i == 5) nomeVacina5 = "VI.Vermifugação";
+                    if (i == 0) nomeVacina  = "| I.Brotulismo     |";
+                    if (i == 1) nomeVacina1 = "| II.Brucelose     |";
+                    if (i == 2) nomeVacina2 = "| III.Clostridioses|";
+                    if (i == 3) nomeVacina3 = "| IV.Febre Aftosa  |";
+                    if (i == 4) nomeVacina4 = "| V.Leptospirose   |";
+                    if (i == 5) nomeVacina5 = "| VI.Vermifugação  |";
                     for (int j = 0; j < CadernetaVacinas[i].Length; j++)
                     {
                         if (CadernetaVacinas[i][j] != null)
@@ -120,20 +119,20 @@ namespace ClinicaVeterinária.Modelo
             }
 
             return $"\n-----------------------------------------------------------------" +
-                $"\n|                            Animal                             | " +
+                $"\n|                        {NomeA}   Tipo: {animalTipo}                 | " +
                 $"\n-----------------------------------------------------------------" +
-                $"\nNome: {NomeA} \nID auricular: {IdAuricular} Regulamentado sobre a lei {DescricaoRegulamentacao(regAuricular)} " +
-                $"\nData de nascimento: {DataNascimento.ToShortDateString()} " +
-                $"\nTipo: {animalTipo} \nProprietário atual: {ProprietarioAtual.Nome} " +
-                $"\n----------------------------------\n|      Caderneta de vacinas       | \n----------------------------------" + 
-                $"\n  Nome:                 Data:"+
-                $"\n {nomeVacina}           {cadernetaVacinas} " +
-                $"\n {nomeVacina1}           {cadernetaVacinas1} " +
-                $"\n {nomeVacina2}           {cadernetaVacinas2} " +
-                $"\n {nomeVacina3}           {cadernetaVacinas3} " +
-                $"\n {nomeVacina4}           {cadernetaVacinas4} " +
-                $"\n {nomeVacina5}           {cadernetaVacinas5} " +
-                $" \n----------------------------------\n";
+                $"\nID auricular: {IdAuricular} Regulamentado sobre a lei {DescricaoRegulamentacao(regAuricular)} " +
+                $"\nData de nascimento: {DataNascimento.ToShortDateString()}| Data de Obito: {DataObito}" +
+                $"\nProprietário atual: {ProprietarioAtual.Nome} " +
+                $"\n----------------------------------\n|      Caderneta de vacinas       | " +
+                $"\n--------------------------------------------------------------------------------------------------------------" + 
+                $"\n | Nome             |id : Data"+
+                $"\n {nomeVacina} {cadernetaVacinas} " +
+                $"\n {nomeVacina1} {cadernetaVacinas1} " +
+                $"\n {nomeVacina2} {cadernetaVacinas2} " +
+                $"\n {nomeVacina3} {cadernetaVacinas3} " +
+                $"\n {nomeVacina4} {cadernetaVacinas4} " +
+                $"\n {nomeVacina5} {cadernetaVacinas5} ";
         }
         
         public string DescricaoRegulamentacao(Regulamentacao regulamentacao)

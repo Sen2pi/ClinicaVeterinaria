@@ -25,18 +25,19 @@ namespace ClinicaVeterinária.Serviço
                 {
                     
                     Console.WriteLine($"Logado com o Veterinario: Os Programadores");
-                    Console.WriteLine("---------------------------------------------------------------- ");
-                    Console.WriteLine("|                Sistema de Registo de Animais                 | ");
-                    Console.WriteLine("---------------------------------------------------------------- ");
-                    Console.WriteLine("| 1 - Listar Animais                                           |");
-                    Console.WriteLine("| 2 - Listar Animais Sem Vacinas                               |");
-                    Console.WriteLine("| 3 - Listar Animais Com Vacinas em Atraso                     |");
-                    Console.WriteLine("| 4 - Registar Animal                                          |");
-                    Console.WriteLine("| 5 - Registar Pessoa                                          |");
-                    Console.WriteLine("| 6 - Registar Vacina                                          |");
-                    Console.WriteLine("| 7 - Alterar Titular                                          |");
-                    Console.WriteLine("| 8 - Listar Titulares                                         |");
-                    Console.WriteLine("|______________________________________________________________|");
+                    Console.WriteLine("---------------------------------------------------------------- ╚0 0╝");
+                    Console.WriteLine("|               Sistema de Registo de Animais                  |╚═███═╝");
+                    Console.WriteLine("----------------------------------------------------------------.╚═███═╝");
+                    Console.WriteLine("| 1 - Listar Animais                                           |╚═███═╝");
+                    Console.WriteLine("| 2 - Listar Animais Sem Vacinas                               |.╚═███═╝");
+                    Console.WriteLine("| 3 - Listar Animais Com Vacinas em Atraso                     |..╚═███═╝");
+                    Console.WriteLine("| 4 - Registar Animal                                          |.╚═███═╝");
+                    Console.WriteLine("| 5 - Registar Pessoa                                          |╚═███═╝");
+                    Console.WriteLine("| 6 - Registar Óbito                                           |╚═███═╝");
+                    Console.WriteLine("| 7 - Registar Vacina                                          |.╚═███═╝");
+                    Console.WriteLine("| 8 - Alterar Titular                                          |..╚═███═╝");
+                    Console.WriteLine("| 9 - Listar Titulares                                         |...╚═███═╝");
+                    Console.WriteLine("|______________________________________________________________|... ╚═█═╝");
                 //Escolha do item do menu
                     Console.WriteLine("Insira uma escolha: ");
                 //Char para podermos corrigir a excepcao try catch 
@@ -44,27 +45,39 @@ namespace ClinicaVeterinária.Serviço
                     switch (escolha)
                     {
                         case '1':
+                            Console.Clear();
                             ListarAnimais();
                             break;
                         case '2':
+                            Console.Clear();
                             AnimaisSemVacinal();
                             break;
                         case '3':
+                            Console.Clear();
                             AnimaisVacinasAtrasadas();
                             break;
                         case '4':
+                            Console.Clear();
                             MenuRegistroAnimal();
                             break;
                         case '5':
+                            Console.Clear();
                             AdicionarPessoa();
                             break;
                         case '6':
-                            RegistarVacina();
+                            Console.Clear();
+                            RegistarObito();
                             break;
                         case '7':
-                            AlterarTitular();
+                            Console.Clear();
+                            RegistarVacina();
                             break;
                         case '8':
+                            Console.Clear();
+                            AlterarTitular();
+                            break;
+                        case '9':
+                            Console.Clear();
                             ListarTitulares();
                             break;
                         default:
@@ -75,6 +88,24 @@ namespace ClinicaVeterinária.Serviço
                 } while (sentinela);
             
         }
+
+        private void RegistarObito()
+        {
+            Console.WriteLine("---------------------------------------------------------------- ");
+            Console.WriteLine("|                     Registar Obito                           | ");
+            Console.WriteLine("---------------------------------------------------------------- ");
+            Console.WriteLine("Insira o ID do Animal Para a Declaração do Óbito: ");
+            string idAuricular = Console.ReadLine();
+            Console.WriteLine("A data de Obito é a de hoje? (Y/N)");
+            char escolha = Console.ReadKey(true).KeyChar;
+            DateTime data = new DateTime();
+            if (escolha == 'Y') { data = DateTime.Now; }
+            else if(escolha == 'N') {
+                Console.WriteLine("Insira a data de Obito (DD/MM/AA HH:MM:SS)");
+                data = Convert.ToDateTime(Console.ReadLine()); }
+            veterinario.DeclararObito(idAuricular, data);
+        }
+
         public void MenuNav()
         {
             Console.WriteLine("Deseja sair da aplicação ou voltar ao menu inicial? ");
@@ -343,7 +374,6 @@ namespace ClinicaVeterinária.Serviço
             Console.WriteLine("---------------------------------------------------------------- ");
             veterinario.ListarAnimaisComVacinasAtraso();
         }
-
         public void PreData()
         {
             // Criação de 5 objetos Pessoa
@@ -373,7 +403,6 @@ namespace ClinicaVeterinária.Serviço
             veterinario.AdicionarNaCaderneta("456", veterinario.ProcurarVacina(4));
             veterinario.AdicionarNaCaderneta("345", veterinario.ProcurarVacina(5));
         }
-
         public void AlterarTitular()
         {
             Console.WriteLine("---------------------------------------------------------------- ");

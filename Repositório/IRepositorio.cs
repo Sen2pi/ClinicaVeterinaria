@@ -12,7 +12,7 @@ namespace ClinicaVeterinária.Repositório
         void AdicionarAnimal(string auricular, Regulamentacao regulamentacao, DateTime nascimento, TipoAnimal tipo, Pessoa pessoa, string nome);
         void AdicionarVacina(int id, DateTime data, string lote, string produtor, int quantidadeMl, Nome nomeV);
         int ObterIndiceDisponivel(Object[] array);
-        void DeclararObito(int id );
+        void DeclararObito(string idAuricular, DateTime data);
         void ListarAnimais();
         void ListarPessoas();
         void ListarAnimaisComVacinasAtraso();

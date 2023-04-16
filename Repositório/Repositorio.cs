@@ -171,18 +171,27 @@ namespace ClinicaVeterinária.Repositório
             }
         }
 
-        public void DeclararObito(int id)
+        public void DeclararObito(string idAuricular, DateTime data)
         {
-            throw new NotImplementedException();
+            Animal animal = ProcurarAnimal(idAuricular);
+            if (animal == null)
+            {
+                Console.WriteLine("Animal não encontrado.");
+                return;
+            }
+            else
+            {
+                animal.DataObito = data;
+            }
         }
 
         public void ListarAnimais()
         {
             try
             {
-                foreach (Animal animal in animaisCadastrados)
+                for (int i=0; i<animaisCadastrados.Length;i++)
                 {
-                    Console.WriteLine(animal.ToString());
+                    Console.WriteLine(animaisCadastrados[i].ToString());
                     Console.WriteLine("____________________________________________________________________________");
                 }
             }
