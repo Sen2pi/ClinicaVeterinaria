@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ClinicaVeterinária.Modelo.Animal">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAKAAQAAQEAAAAgAAAAAYAAAAAIAAgAAAAAAQ=</HashCode>
+      <FileName>Modelo\Animal.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ClinicaVeterinária.Modelo.Pessoa">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgCAAAAAEAAAAAAAAAAAAAAAAAAAAAAEAEAA=</HashCode>
+      <FileName>Modelo\Pessoa.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ClinicaVeterinária.Modelo.Vacina">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAABAECAAEAAABAAAAAAAAQBAAAAAAAAEAAgA=</HashCode>
+      <FileName>Modelo\Vacina.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ClinicaVeterinária.Program">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ClinicaVeterinária.Repositório.Repositorio" BaseTypeListCollapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAECIgAVAAAAAIDgAAABBABAAAUAAgABCAAA=</HashCode>
+      <FileName>Repositório\Repositorio.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ClinicaVeterinária.Serviço.Servico">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAIAAAAAEAAAAKABgBCAQAAEAIEAAEI=</HashCode>
+      <FileName>Serviço\Servico.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="ClinicaVeterinária.Repositório.IRepositorio">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAECIgAVAAAAAIDgAAABAABAAAAAAgABAAAA=</HashCode>
+      <FileName>Repositório\IRepositorio.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="ClinicaVeterinária.Modelo.Nome" Collapsed="true">
+    <Position X="7.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAABgAAAAAAAAAIQAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Modelo\Nome.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ClinicaVeterinária.Modelo.Regulamentacao" Collapsed="true">
+    <Position X="7.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAAAAAAAAQAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Modelo\Regulamentacao.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ClinicaVeterinária.Modelo.TipoAnimal" Collapsed="true">
+    <Position X="7.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAQACAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modelo\TipoAnimal.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
