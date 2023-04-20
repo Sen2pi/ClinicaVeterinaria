@@ -7,10 +7,12 @@ namespace ClinicaVeterinária
     {
         static void Main(string[] args)
         {
-            Servico menu = new Servico();
-            menu.PreData();
-            Console.Clear();
-            menu.MostrarMenu();
+             Servico menu = new Servico();
+             menu.PreData();
+             Console.Clear();
+             menu.MostrarMenu();
+
+            
         }
     }
 }
